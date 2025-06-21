@@ -1,0 +1,34 @@
+// ========================================
+// 1. VARIABLES
+// ========================================
+:root {
+  // Colors
+  --primary-dark: #1a1a1a;
+  --primary-light: #2d2d2d;
+  --accent-gold: #e3c151;
+  --accent-gold-hover: #b8941f;
+  --text-primary: #ffffff;
+  --text-secondary: #b0b0b0;
+  --text-muted: #888888;
+  --background-dark: #0f0f0f;
+  --background-card: #1e1e1e;
+  --border-color: #333333;
+  --shadow-color: rgba(0, 0, 0, 0.3);
+
+  // Typography
+  --font-primary: "Playfair Display", serif;
+  --font-secondary: "Inter", sans-serif;
+
+  // Spacing
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 3rem;
+  --spacing-xxl: 4rem;
+
+  // Transitions
+  --transition-fast: 0.2s ease;
+  --transition-smooth: 0.3s ease;
+  --transition-slow: 0.5s ease;
+}

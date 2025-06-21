@@ -1,0 +1,28 @@
+// ========================================
+//  RESPONSIVE DESIGN
+// ========================================
+@media (max-width: 768px) {
+  header {
+    padding: var(--spacing-sm) 0;
+
+    .header-brand {
+      font-size: 1.5rem;
+    }
+
+    .header-nav {
+      font-size: 0.85rem;
+    }
+  }
+
+  .hero {
+    padding: var(--spacing-xl) 0;
+
+    h1 {
+      font-size: 2.5rem;
+    }
+
+    p {
+      font-size: 1rem;
+    }
+  }
+}

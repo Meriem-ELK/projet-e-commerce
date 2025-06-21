@@ -1,0 +1,16 @@
+/* Componenets */
+@use "./components/forms" as *;
+@use "./components/bouton" as *;
+
+/* Core */
+@use "./core/base" as *;
+@use "./core/variables" as *;
+
+/* Layout */
+@use "./layout/header" as *;
+@use "./layout/footer" as *;
+
+/* Pages */
+@use "./pages/home" as *;
+@use "./pages/product" as *;
+@use "./pages/mobile" as *;

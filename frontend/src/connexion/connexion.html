@@ -1,0 +1,73 @@
+<!-- produit.html -->
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Montres de Luxe - Connexion</title>
+    <script type="module" src="./connexion.js"></script>
+  </head>
+  <body>
+    <div class="container_principal">
+      <header>
+        <a class="header-brand" href="/">ChronosLuxe</a>
+        <ul>
+          <li>
+            <a href="../../index.html" class="header-nav">Accueil</a>
+          </li>
+          <li>
+            <a href="../../produitAjout/produit-ajout.html" class="header-nav"
+              >Ajouter un produit</a
+            >
+          </li>
+          <li>
+            <a href="../../inscription/inscription.html" class="header-nav"
+              >Inscription</a
+            >
+          </li>
+          <li>
+            <a href="../../connexion/connexion.html" class="header-nav active"
+              >Connexion</a
+            >
+          </li>
+        </ul>
+      </header>
+      <main>
+        <div class="form-container">
+          <h1>Connexion</h1>
+
+          <div id="successMessage" class="success-message">
+            Connexion réussie ! Bienvenue !
+          </div>
+
+          <div id="errorMessage" class="error-message"></div>
+
+          <form id="connexionForm">
+            <div class="form-group">
+              <label for="email">Email (*)</label>
+              <input type="email" id="email" name="email" />
+            </div>
+
+            <div class="form-group">
+              <label for="motdepasse">Mot de passe (*)</label>
+              <input type="password" id="motdepasse" name="motdepasse" />
+              <div class="password-error">
+                Le mot de passe n'est pas valide !
+              </div>
+            </div>
+
+            <p>(*) Le champ est obligatoire.</p>
+
+            <div class="form-actions">
+              <button type="button" class="btn btn-secondary">Annuler</button>
+              <button type="submit" class="btn">Connexion</button>
+            </div>
+          </form>
+        </div>
+      </main>
+      <footer>
+        © 2025 ChronosLuxe - Montres de Luxe. Tous droits réservés.
+      </footer>
+    </div>
+  </body>
+</html>

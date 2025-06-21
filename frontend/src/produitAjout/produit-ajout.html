@@ -1,0 +1,154 @@
+<!-- produit.html -->
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Montres de Luxe -  Ajouetr Produit</title>
+    <script type="module" src="./produit-ajout.js"></script>
+  </head>
+  <body>
+   <body>
+    <div class="container_principal">
+      <header>
+        <a class="header-brand" href="/">ChronosLuxe</a>
+        <ul>
+          <li>
+            <a href="../index.html" class="header-nav ">Accueil</a>
+          </li>
+          <li>
+            <a href="../produitAjout/produit-ajout.html" class="header-nav active"
+              >Ajouter un produit</a
+            >
+          </li>
+           <li>
+            <a href="../inscription/inscription.html" class="header-nav">Inscription</a>
+          </li>
+          <li>
+            <a href="../connexion/connexion.html" class="header-nav">Connexion</a>
+          </li>
+        </ul>
+      </header>
+      <main>
+
+        <div class="form-container">
+                <h1>Ajouter une nouvelle montre</h1>
+                
+                <div class="success-message" id="successMessage">
+                    Produit ajouté avec succès !
+                </div>
+                
+                <div class="error-message" id="errorMessage">
+                    Veuillez remplir tous les champs obligatoires.
+                </div>
+
+                <form id="productForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="nom">Nom de la montre *</label>
+                            <input type="text" id="nom" name="nom">
+                        </div>
+                        <div class="form-group">
+                            <label for="marque">Marque *</label>
+                            <select id="marque" name="marque">
+                                <option value="">Sélectionnez une marque</option>
+                                <option value="Rolex">Rolex</option>
+                                <option value="Omega">Omega</option>
+                                <option value="Audemars Piguet">Audemars Piguet</option>
+                                <option value="Cartier">Cartier</option>
+                                <option value="Hublot">Hublot</option>
+                                <option value="Patek Philippe">Patek Philippe</option>
+                                <option value="Longines">Longines</option>
+                                <option value="Tudor">Tudor</option>
+                                <option value="Autre">Autre</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">Description *</label>
+                        <textarea id="description" name="description" placeholder="Décrivez les caractéristiques principales de la montre..."></textarea>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="prix">Prix (en $) *</label>
+                            <input type="number" id="prix" name="prix" min="0">
+                        </div>
+                        <div class="form-group">
+                            <label for="stock">Stock disponible *</label>
+                            <input type="number" id="stock" name="stock" min="0">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="categorie">Catégorie *</label>
+                            <select id="categorie" name="categorie">
+                                <option value="">Sélectionnez une catégorie</option>
+                                <option value="Plongée">Plongée</option>
+                                <option value="Chronographe">Chronographe</option>
+                                <option value="Luxury Sport">Luxury Sport</option>
+                                <option value="Dress">Dress</option>
+                                <option value="GMT">GMT</option>
+                                <option value="Sport">Sport</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="materiau">Matériau *</label>
+                            <select id="materiau" name="materiau">
+                                <option value="">Sélectionnez un matériau</option>
+                                <option value="Acier">Acier</option>
+                                <option value="Or">Or</option>
+                                <option value="Titane">Titane</option>
+                                <option value="Céramique">Céramique</option>
+                                <option value="Titane/Céramique">Titane/Céramique</option>
+                                <option value="Platine">Platine</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="mouvement">Mouvement *</label>
+                            <select id="mouvement" name="mouvement">
+                                <option value="">Sélectionnez un mouvement</option>
+                                <option value="Automatique">Automatique</option>
+                                <option value="Manuel">Manuel</option>
+                                <option value="Quartz">Quartz</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="etancheite">Étanchéité *</label>
+                            <select id="etancheite" name="etancheite">
+                                <option value="">Sélectionnez l'étanchéité</option>
+                                <option value="30m">30m</option>
+                                <option value="50m">50m</option>
+                                <option value="100m">100m</option>
+                                <option value="120m">120m</option>
+                                <option value="200m">200m</option>
+                                <option value="300m">300m</option>
+                                <option value="600m">600m</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="image">URL de l'image</label>
+                        <input type="url" id="image" name="image" placeholder="https://example.com/image.jpg">
+                    </div>
+
+                    <div class="form-actions">
+                        <a href="../index.html" class="btn btn-secondary">Annuler</a>
+                        <button class="btn">Ajouter le produit</button>
+                    </div>
+                </form>
+            </div>
+
+      </main>
+      <footer>
+        © 2025 ChronosLuxe - Montres de Luxe. Tous droits réservés.
+      </footer>
+    </div>
+  </body>
+</html>
