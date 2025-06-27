@@ -1,0 +1,30 @@
+[
+  {
+    "_type": "User",
+    "id": 1,
+    "email": "meriem@test.test",
+    "password": "1234",
+    "nom": "Meriem Elkouarir",
+    "role": "admin",
+    "estActif": true,
+    "dateInscription": "2025-06-10T19:01:23.369Z"
+  },
+  {
+    "_type": "User",
+    "id": 2,
+    "email": "nadia@test.test",
+    "password": "1234",
+    "nom": "nadia elk",
+    "role": "client",
+    "estActif": true,
+    "dateInscription": "2025-06-10T19:01:23.369Z"
+  },
+  {
+    "nom": "testuser",
+    "email": "testuser@test.fr",
+    "password": "999999",
+    "id": 3,
+    "createdAt": "2025-06-26T16:35:40.741Z",
+    "updatedAt": "2025-06-26T16:35:40.741Z"
+  }
+]
