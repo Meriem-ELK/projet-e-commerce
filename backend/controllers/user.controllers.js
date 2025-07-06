@@ -27,7 +27,7 @@ export const listerTousLesUtilisateurs = async (req, res) => {
 };
 
 /**
- * 
+ * Obtenir un utilisateur par ID
 */
 export const obtenirUnUtilisateur = async (req, res) => {
   try {
@@ -66,6 +66,10 @@ export const supprimerUnUtilisateur = async (req, res) => {
   }
 };
 
+/**
+ * Trouver un utilisateur par email
+*/
+
 export const trouverParEmail = async (req, res) => {
   try {
     const user = await User.findByEmail(req.params.email);
@@ -76,3 +80,46 @@ export const trouverParEmail = async (req, res) => {
   }
 };
 
+
+/**
+ * Connexion d'un utilisateur - VERSION CORRIGÉE
+*/
+export const connecterUtilisateur = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    // Vérifier que l'email et le mot de passe sont fournis
+    if (!email || !password) {
+      return res.status(400).json({ 
+        message: "Email et mot de passe sont requis" 
+      });
+    }
+
+    // Trouver l'utilisateur par email
+    const user = await User.findByEmail(email);
+    if (!user) {
+      return res.status(404).json({ 
+        message: "Email ou mot de passe incorrect" 
+      });
+    }
+
+    // Vérifier le mot de passe
+    if (user.password !== password) {
+      return res.status(401).json({ 
+        message: "Email ou mot de passe incorrect" 
+      });
+    }
+
+    // Connexion réussie
+    res.json({
+      message: "Connexion réussie",
+      success: true
+    });
+
+  } catch (error) {
+    res.status(500).json({ 
+      message: "Erreur serveur", 
+      error: error.message 
+    });
+  }
+};

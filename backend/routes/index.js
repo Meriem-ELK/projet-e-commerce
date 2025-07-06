@@ -21,7 +21,7 @@ const validateRequest = (schema) => (req, res, next) => {
 
 //test pour verifier que le serveur fonctionne
 router.get("/", (req, res) => {
-  res.end("Coucou !");
+  res.end("Test le serveur fonctionne !");
 });
 
 //Utilisation des routes définies

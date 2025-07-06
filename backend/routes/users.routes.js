@@ -8,6 +8,7 @@ import {
   supprimerUnUtilisateur,
   trouverParEmail,
   obtenirUnUtilisateur,
+  connecterUtilisateur
 } from "../controllers/user.controllers.js";
 
 // POST / - Créer un utilisateur
@@ -27,5 +28,8 @@ router.delete("/:id", supprimerUnUtilisateur);
 
 // GET //email/:email - Trouver par email
 router.get("/email/:email", trouverParEmail);
+
+// POST /login - Connexion d'un utilisateur 
+router.post("/login", connecterUtilisateur);
 
 export default router;

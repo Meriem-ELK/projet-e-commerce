@@ -3,16 +3,18 @@ Une plateforme e-commerce minimaliste et performante dédiée à la vente de mon
 
 ## Frontend - Vanilla JS + Vite
 - Bundler : Vite pour le Hot Module Replacement et les optimisations
-- Langage : JavaScript Vanilla (ES6+)
+- Langage : JavaScript Vanilla
 - Styling : CSS moderne avec variables CSS et Grid/Flexbox
 - Performance : Optimisations automatiques via Vite
 
 ## Backend - Node.js + Express
 - Runtime : Node.js
 - Framework : Express.js
-- Authentification : JWT (JSON Web Tokens)
-- Sécurité : bcrypt, rate limiting
 
 ## Base de Données
 Type : Objets JSON (pas de base de données traditionnelle)
 Stockage : Fichiers JSON pour les données produits et utilisateurs
+
+## Comptes de Test :
+-	Email: meriem@test.test
+-	Mot de passe : meriem123456

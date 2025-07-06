@@ -5,42 +5,23 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Montres de Luxe - Inscription</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link href="https://fonts.googleapis.com/css2?family=Wix+Madefor+Text:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
   </head>
   <body>
     <div class="container_principal">
+
       <header>
-        <a class="header-brand" href="/">ChronosLuxe</a>
+        <a class="header-brand" href="/"><i class="fas fa-clock"></i> ChronosLuxe</a>
         <ul>
-          <li>
-            <a href="../index.html" class="header-nav">Accueil</a>
-          </li>
-          <li>
-            <a href="../../produitAjout/produit-ajout.html" class="header-nav"
-              >Ajouter un produit</a
-            >
-          </li>
-          <li>
-            <a
-              href="../../inscription/inscription.html"
-              class="header-nav active"
-              >Inscription</a
-            >
-          </li>
-          <li>
-            <a href="../../connexion/connexion.html" class="header-nav"
-              >Connexion</a
-            >
-          </li>
         </ul>
       </header>
+
       <main>
         <div class="form-container">
           <h1>Inscription</h1>
 
-          <div id="successMessage" class="success-message">
-            Inscription réussie ! Bienvenue !
-          </div>
-
+          <div id="successMessage" class="success-message"></div>
           <div id="errorMessage" class="error-message"></div>
 
           <form id="inscriptionForm">
@@ -48,41 +29,36 @@
               <label for="prenom">Prénom (*)</label>
               <input type="text" id="prenom" name="prenom" />
             </div>
-
             <div class="form-group">
               <label for="nom">Nom (*)</label>
               <input type="text" id="nom" name="nom" />
             </div>
-
             <div class="form-group">
               <label for="email">Email (*)</label>
               <input type="email" id="email" name="email" />
             </div>
-
             <div class="form-group">
-              <label for="motdepasse"
-                >Mot de passe (* 6 caractères minimum)</label
-              >
+              <label for="motdepasse">Mot de passe (* 6 caractères minimum)</label>
               <input type="password" id="motdepasse" name="motdepasse" />
             </div>
-
             <div class="form-group">
               <label for="confirmation">Confirmation mot de passe (*)</label>
               <input type="password" id="confirmation" name="confirmation" />
             </div>
-
-            <p>(*) Le champ est obligatoire.</p>
-
+            <p style="font-size: 11px;">(*) Le champ est obligatoire.</p>
             <div class="form-actions">
-              <button type="button" class="btn btn-secondary">Annuler</button>
-              <button type="submit" class="btn">Valider</button>
+              <a href="../index.html" class="btn btn-secondary">Annuler</a>
+              <button type="submit" class="btn"><i class="fas fa-user-plus"></i> Créer le compte</button>
             </div>
           </form>
+
         </div>
       </main>
+
       <footer>
-        © 2025 ChronosLuxe - Montres de Luxe. Tous droits réservés.
+          &copy; 2025 - Meriem El kouarir - ChronosShop . Tous droits réservés.
       </footer>
+      
     </div>
     <script type="module" src="./inscription.js"></script>
   </body>

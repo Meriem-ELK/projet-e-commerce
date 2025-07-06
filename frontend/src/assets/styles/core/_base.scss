@@ -1,5 +1,5 @@
 // ========================================
-// 2. RESET AND BASE STYLES
+// RESET AND BASE STYLES
 // ========================================
 * {
   margin: 0;
@@ -8,7 +8,7 @@
 }
 
 body {
-  font-family: var(--font-secondary);
+  font-family: var(--font-primary);
   color: var(--text-primary);
   line-height: 1.6;
   min-height: 100vh;
@@ -18,7 +18,7 @@ body {
 }
 
 // ========================================
-// 3. LAYOUT COMPONENTS
+// LAYOUT COMPONENTS
 // ========================================
 
 // Container
@@ -27,10 +27,6 @@ body {
   margin: 0 auto;
   display: flex;
   flex-flow: column;
-
-  @media (max-width: 768px) {
-    padding: 0 var(--spacing-sm);
-  }
 }
 
 .container_principal {
@@ -46,66 +42,12 @@ main {
 }
 
 // ========================================
-// 8. UTILITY CLASSES
 // ========================================
 .text-center {
   text-align: center;
 }
 
-.mb-0 {
-  margin-bottom: 0;
-}
-.mb-1 {
-  margin-bottom: var(--spacing-xs);
-}
-.mb-2 {
-  margin-bottom: var(--spacing-sm);
-}
-.mb-3 {
-  margin-bottom: var(--spacing-md);
-}
-.mb-4 {
-  margin-bottom: var(--spacing-lg);
-}
-
-// ========================================
-// 9. ANIMATIONS
-// ========================================
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slideInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes slideInRight {
-  from {
-    opacity: 0;
-    transform: translateX(50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
 /**/
-
 .error-container {
   background-color: #fdecea;
   border: 1px solid #f5c2c7;
@@ -114,9 +56,14 @@ main {
   margin: 16px 0;
   border-radius: 6px;
   font-size: 16px;
+  min-width: 450px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 10px;
+}
+
+header .header-nav.user-info{ 
+  color: var(--accent-gold);
 }
