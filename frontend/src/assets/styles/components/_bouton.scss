@@ -10,19 +10,19 @@
   transition: all 0.3s ease;
   text-decoration: none;
   margin-right: 1rem;
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+      }
 }
 
-  .btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
-  }
 
 .btn-secondary {
   background: #6c757d;
   color: white;
 }
 
-  .btn-secondary:hover {
-    background: #5a6268;
-    box-shadow: 0 5px 15px rgba(108, 117, 125, 0.3);
-  }
+.btn-secondary:hover {
+  background: #5a6268;
+  box-shadow: 0 5px 15px rgba(108, 117, 125, 0.3);
+}

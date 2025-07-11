@@ -1,7 +1,7 @@
 // Import
 import JSONArrayDatabase from "../JSONArrayDatabase.js";
 
-const usersDB = new JSONArrayDatabase("users.json");
+const usersDB = new JSONArrayDatabase("utilisateurs.json");
 
 export default class User {
 

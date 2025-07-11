@@ -16,5 +16,11 @@ Type : Objets JSON (pas de base de données traditionnelle)
 Stockage : Fichiers JSON pour les données produits et utilisateurs
 
 ## Comptes de Test :
+
+### Administrateur :
 -	Email: meriem@test.test
 -	Mot de passe : meriem123456
+
+### client :
+-	Email: dani@test.test
+-	Mot de passe : dani1234

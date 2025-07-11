@@ -1,10 +1,9 @@
+// ===================== produitModif.js
 import "../assets/styles/styles.scss";
 // Importation des variables d'environnement
 import { env } from "../config/env.js";
-
 // Importation des fonctions de validation et d'affichage d'erreurs
 import { formIsValid, displayErrors } from "../utils/validation.js";
-
 import { estConnecte, mettreAJourHeader } from "../utils/auth.js";
 
 // Vérifier si l'utilisateur est connecté
@@ -61,7 +60,7 @@ form.addEventListener('submit', async function(e) {
  */
 async function loadProductData(id) {
     try {
-        console.log("Chargement du produit depuis le backend...");
+        //console.log("Chargement du produit depuis le backend...");
         
         // Récupérer le produit spécifique du backend
         const response = await fetch(`${env.BACKEND_PRODUCTS_URL}/${id}`);
@@ -119,7 +118,6 @@ async function updateProduct(id, updatedData) {
             etancheite: updatedData.etancheite,
             prix: parseFloat(updatedData.prix),
             stock: parseInt(updatedData.stock),
-            prix: parseFloat(updatedData.prix),
             image: updatedData.image?.trim() || null
         };
         

@@ -4,10 +4,14 @@ import "./assets/styles/styles.scss";
 //Import des variables d'environnement depuis un fichier de config
 import { env } from "./config/env.js";
 
-import { mettreAJourHeader, estConnecte } from "./utils/auth.js";
+import { mettreAJourHeader, estConnecte, estAdmin } from "./utils/auth.js";
+import { initialiserCompteurPanier, addCartEvents  } from "./utils/panier.js";
+import { showSuccessMessage, showErrorMessage } from "./utils/messages.js";
+import { supprimerProduit, recupererTousLesProduits } from "./utils/produits.js";
 
-// Met à jour l'en-tête de la page selon que l'utilisateur est connecté ou non
 mettreAJourHeader();
+
+initialiserCompteurPanier();
 
 const content = document.querySelector(".content");
 
@@ -15,40 +19,26 @@ const content = document.querySelector(".content");
 // Fonction pour récupérer et afficher les produits depuis le backend
 const fetchProduits = async () => {
   try {
-    // console.log("Chargement des produits depuis le backend...");
+    // Utiliser la fonction utilitaire pour récupérer les produits
+    const produits = await recupererTousLesProduits();
     
-    // Récupérer les produits du backend
-    const response = await fetch(env.BACKEND_PRODUCTS_URL);
-    
-    // Vérifier si la réponse est valide
-    if (!response.ok) {
-      throw new Error(`Erreur HTTP: ${response.status}`);
+    if (produits.length === 0) {
+      showErrorMessage("Aucun produit disponible.", content);
+      return;
     }
-    
-    // Convertir en JSON
-    let produits = await response.json();
-    
-    // S'assurer que c'est un tableau
-    if (!Array.isArray(produits)) {
-      produits = [produits];
-    }
-    
-    // console.log("Produits récupérés:", produits);
-    
+     
     // Afficher les produits dans la page
     displayProduits(produits);
     
   } catch (error) {
     console.error("Une erreur est survenue lors de la récupération.", error);
-    showErrorMessage("Échec du chargement des produits.");
+    showErrorMessage("Échec du chargement des produits.", content);
   }
 };
 
 /* ============================================================= displayProduits */
 // Fonction pour afficher les produits dans le DOM
 const displayProduits = (produits) => {
-  // console.log("Affichage des produits:", produits);
-  // console.log("Utilisateur connecté:", estConnecte());
 
   // Réinitialiser le conteneur
   content.innerHTML = "";
@@ -66,10 +56,13 @@ const displayProduits = (produits) => {
   // Ajouter tous les produits au conteneur
   productsContainer.append(...products);
   
-  // Ajouter les événements pour modifier/supprimer SEULEMENT si connecté
-  if (estConnecte()) {
+  // Ajouter les événements pour modifier/supprimer SEULEMENT si admin
+  if (estAdmin()) {
     addEditDeleteEvents(productsContainer);
   }
+  
+  // Ajouter les événements pour le panier
+  addCartEvents(productsContainer, (message) => showSuccessMessage(message, content));
   
   // Ajouter le conteneur à la page
   content.append(productsContainer);
@@ -81,51 +74,71 @@ const createProductElement = (produit) => {
   const div = document.createElement("div");
   div.className = "product-card";
   
-  // Afficher les boutons d'actions SEULEMENT si l'utilisateur est connecté
-  const actionsHTML = estConnecte() ? `
+  // Afficher les boutons d'actions SEULEMENT si l'utilisateur est admin
+  const actionsHTML = estAdmin() ? `
     <div class="product-actions product_btn">
-      <button class="btn-edit" data-id="${produit.id}">
+      <button class="btn-edit" data-id="${produit.id}" title='Modifier'>
         <i class="fa-solid fa-pen-to-square"></i>
       </button>
-      <button class="btn-delete" data-id="${produit.id}">
+      <button class="btn-delete" data-id="${produit.id}" title='Supprimer'>
         <i class="fa-solid fa-trash"></i>
       </button>
     </div>
   ` : '';
   
-   // Contenu HTML de la carte produit
-  div.innerHTML = `
-    ${actionsHTML}
-
-    <div class="product-content">
-      <div class="product-image">
-        <img src="${produit.image}" alt="${produit.nom}">
-      </div>
-      
-      <div class="product-info">
-        <h3 class="brand">${produit.marque}</h3>
-        <h2 class="title">${produit.nom}</h2>
-        <p class="price">${produit.prix}$</p>
-      </div>
-      
-      <div class="product-link">
-        <a href="/produit/produit.html?id=${produit.id}" class="btn-view">
-         <i class="fas fa-eye"></i> Voir le produit
-        </a>
-      </div>
-    </div>
-  `;
+  // Déterminer le texte et l'état du bouton selon le stock
+  const boutonTexte = produit.stock > 0 ? 
+    '<i class="fas fa-cart-plus"></i> Ajouter au panier' : 
+    '<i class="fas fa-shopping-cart"></i> Rupture de stock';
   
-  return div;
-};
+  const boutonClasse = produit.stock > 0 ? 'btn-add-to-cart' : 'disabled';
+  
+  // Contenu HTML de la carte produit
+    let contentHTML = `
+      ${actionsHTML}
+
+      <div class="product-content">
+        <div class="product-image">
+          <a href="/produit/produit.html?id=${produit.id}">
+            <img src="${produit.image}" alt="${produit.nom}">
+          </a>
+        </div>
+        
+        <div class="product-info">
+          <h3 class="brand">${produit.marque}</h3>
+          <h2 class="title">${produit.nom}</h2>
+          <p class="price">${produit.prix}$</p>
+        </div>
+    `;
+
+    // Ajout du bouton si connecté et pas admin (dans .product-content)
+    if (estConnecte() && !estAdmin()) {
+      contentHTML += `
+        <div class="product-link">
+          <button class="btn-acheter ${boutonClasse}" data-produit='${JSON.stringify(produit)}' ${produit.stock <= 0 ? 'disabled' : ''}>
+            ${boutonTexte}
+          </button>
+        </div>
+      `;
+    }
+
+    // Fermeture du bloc .product-content
+    contentHTML += `
+      </div>
+    `;
+    
+    div.innerHTML = contentHTML;
+
+    return div;
+    };
 
 /* ============================================================= addEditDeleteEvents */
 // Fonction pour ajouter les événements de modification et suppression
 const addEditDeleteEvents = (container) => {
 
-  // Vérifier si l'utilisateur est connecté
-  if (!estConnecte()) {
-    console.log("Utilisateur non connecté - pas d'événements ajoutés");
+  // Vérifier si l'utilisateur est admin
+  if (!estAdmin()) {
+    console.log("Utilisateur non admin - pas d'événements ajoutés");
     return;
   }
 
@@ -148,74 +161,18 @@ const addEditDeleteEvents = (container) => {
     button.addEventListener("click", async (event) => {
       const productId = event.target.closest(".btn-delete").dataset.id;
       
-      // Demander confirmation
-      const confirmDelete = confirm("Cette action est définitive. Voulez-vous vraiment continuer ?");
+      // Utiliser la fonction utilitaire pour supprimer
+      const suppressionReussie = await supprimerProduit(productId, false);
       
-      if (confirmDelete) {
-        try {
-          console.log("Suppression du produit:", productId);
-          
-          // Envoyer la requête de suppression au backend
-          const response = await fetch(`${env.BACKEND_PRODUCTS_URL}/${productId}`, {
-            method: "DELETE"
-          });
-          
-          if (!response.ok) {
-            throw new Error(`Erreur de suppression: ${response.status}`);
-          }
-          
-          // Optionnel: récupérer la réponse
-          const result = await response.json();
-          console.log("Réponse du serveur:", result);
-          
-          // Recharger les produits depuis le backend
-          await fetchProduits();
-          
-          showSuccessMessage("Produit supprimé avec succès");
-          
-        } catch (error) {
-          console.error("Erreur lors de la suppression:", error);
-          showErrorMessage("Erreur lors de la suppression du produit");
-        }
+      if (suppressionReussie) {
+        // Recharger les produits depuis le backend
+        await fetchProduits();
+        showSuccessMessage("Produit supprimé avec succès", content);
+      } else {
+        showErrorMessage("Erreur lors de la suppression du produit", content);
       }
     });
   });
-};
-
-/* ============================================================= showErrorMessage */
-// Fonction pour afficher un message d'erreur
-const showErrorMessage = (message) => {
-  const errorDiv = document.createElement("div");
-  errorDiv.className = "message error";
-  errorDiv.textContent = message;
-  
-  // Ajouter au début du conteneur
-  content.insertBefore(errorDiv, content.firstChild);
-  
-  // Supprimer après 5 secondes
-  setTimeout(() => {
-    if (errorDiv.parentNode) {
-      errorDiv.remove();
-    }
-  }, 5000);
-};
-
-/* ============================================================= showSuccessMessage */
-// Fonction pour afficher un message de succès
-const showSuccessMessage = (message) => {
-  const successDiv = document.createElement("div");
-  successDiv.className = "message success";
-  successDiv.textContent = message;
-  
-  // Ajouter au début du conteneur
-  content.insertBefore(successDiv, content.firstChild);
-  
-  // Supprimer après 5 secondes
-  setTimeout(() => {
-    if (successDiv.parentNode) {
-      successDiv.remove();
-    }
-  }, 5000);
 };
 
 // Initialiser l'application - charger les produits au démarrage

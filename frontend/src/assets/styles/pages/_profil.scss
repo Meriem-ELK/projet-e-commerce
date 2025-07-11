@@ -1,0 +1,112 @@
+/* Profile header */
+.profile-header {
+    padding: var(--spacing-xs);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 25px;
+}
+
+.profile-avatar i {
+    font-size: 3rem;
+    color: var(--primary-dark);
+    background: var(--text-primary);
+    padding: var(--spacing-xs);
+    border-radius: 50%;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.profile-title h2 {
+    font-size: 1.5rem;
+}
+
+/* Profile content */
+.profile-content {
+    padding: var(--spacing-xs);
+}
+
+.profile-section {
+    margin-bottom: var(--spacing-lg);
+}
+
+.section-title {
+    color: var(--accent-gold);
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: var(--spacing-md);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    padding-bottom: var(--spacing-xs);
+    border-bottom: 2px solid var(--border-color);
+        & i {
+            font-size: 1.2rem;
+        }
+
+}
+
+.profile-info {
+    display: grid;
+    gap: var(--spacing-md);
+}
+/**/
+.info-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-md);
+    background: var(--primary-light);
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    transition: var(--transition-smooth);
+        &:hover {
+            background: var(--primary-dark);
+            border-color: var(--accent-gold);
+            transform: translateY(-2px);
+        }   
+        & label {
+            color: var(--text-secondary);
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        & span {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+}
+
+/* Badges */
+.role-badge,
+.status-badge {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.role-badge.admin {
+    background: linear-gradient(45deg, #ff6b6b, #ee5a52);
+    color: white;
+    box-shadow: 0 2px 8px rgba(255, 107, 107, 0.3);
+}
+
+.role-badge.user {
+    background: linear-gradient(45deg, #4ecdc4, #44a08d);
+    color: white;
+    box-shadow: 0 2px 8px rgba(78, 205, 196, 0.3);
+}
+
+.status-badge.active {
+    background: linear-gradient(45deg, #51cf66, #40c057);
+    color: white;
+    box-shadow: 0 2px 8px rgba(81, 207, 102, 0.3);
+}
+
+.status-badge.inactive {
+    background: linear-gradient(45deg, #868e96, #6c757d);
+    color: white;
+    box-shadow: 0 2px 8px rgba(134, 142, 150, 0.3);
+}

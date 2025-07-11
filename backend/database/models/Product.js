@@ -1,7 +1,7 @@
 // Import 
 import JSONArrayDatabase from "../JSONArrayDatabase.js";
 
-const productsDB = new JSONArrayDatabase("products.json");
+const productsDB = new JSONArrayDatabase("produits.json");
 
 export default class Product {
   

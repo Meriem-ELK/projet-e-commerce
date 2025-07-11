@@ -1,19 +1,15 @@
+// ===================== produit-ajout.js
 import "../assets/styles/styles.scss";
-
 // Importation des variables d'environnement
 import { env } from "../config/env.js";
-
-// Importation des fonctions de validation et d'affichage d'erreurs
 import { formIsValid, displayErrors } from "../utils/validation.js";
-
 import { estConnecte, mettreAJourHeader } from "../utils/auth.js";
 
-// Vérifier si l'utilisateur est connecté
-if (!estConnecte()) {
-    alert('Vous devez être connecté pour ajouter un produit');
+// Vérifier si l'utilisateur est connecté ET est un administrateur
+if (!estConnecte() ) {
+    alert('Vous devez être connecté en tant qu\'administrateur pour ajouter un produit');
     window.location.href = '../connexion/connexion.html';
 }
-
 // Mettre à jour le header
 mettreAJourHeader();
 
@@ -47,27 +43,38 @@ form.addEventListener("submit", async (event) => {
         materiau: montre.materiau,
         mouvement: montre.mouvement,
         etancheite: montre.etancheite,
-        image: montre.image,
+        image: montre.image?.trim() || null,   // Nettoyage du champ image
         prix: parseFloat(montre.prix),  // Conversion du prix en nombre flottant
         stock: parseInt(montre.stock),  // Conversion du stock en entier
-        image: montre.image?.trim() || null,   // Nettoyage du champ image
-        id: Date.now(), // Générer un ID unique
-        dateAjout: new Date().toISOString()  //Ajout de la date d’ajout au format ISO
+        dateAjout: new Date().toISOString() 
       };
 
+      // Récupérer le token d'authentification
+      const token = localStorage.getItem('authToken');
+      
+      const headers = {
+        'Content-Type': 'application/json'
+      };
+      
+      // Ajouter le token seulement s'il existe
+      if (token) {
+        headers['Authorization'] = `Bearer ${token}`;
+      }
 
       // Envoi des données au backend via une requête POST
       const response = await fetch(env.BACKEND_PRODUCTS_URL, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: headers,
         body: JSON.stringify(productData)
       });
 
+      // Vérifier si la requête a réussi
+      if (!response.ok) {
+        throw new Error(`Erreur HTTP: ${response.status}`);
+      }
+
       // Récupération de la réponse JSON
       const result = await response.json();
-
 
       // Afficher le message de succès
       successElement.textContent = "Produit ajouté avec succès !";
@@ -80,6 +87,7 @@ form.addEventListener("submit", async (event) => {
       window.scrollTo({ top: 0, behavior: "smooth" });
 
     } catch (error) {
+      console.error("Erreur lors de l'ajout:", error);
       errorElement.textContent = "Erreur lors de l'ajout du produit.";
       errorElement.style.display = "block";
       successElement.style.display = "none";

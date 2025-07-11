@@ -4,7 +4,7 @@
     "id": 1,
     "email": "meriem@test.test",
     "password": "meriem123456",
-    "nom": "Meriem Elkouarir",
+    "nom": "Meriem El kouarir",
     "role": "admin",
     "estActif": true,
     "dateInscription": "2025-07-02T19:01:23.369Z"
@@ -12,10 +12,10 @@
   {
     "_type": "User",
     "id": 2,
-    "email": "asmaa@test.test",
-    "password": "asmaa1234",
-    "nom": "asmaa elk",
-    "role": "client",
+    "email": "dani@test.test",
+    "password": "dani1234",
+    "nom": "Dani elk",
+    "role": "user",
     "estActif": true,
     "dateInscription": "2025-07-02T20:10:23.369Z"
   }

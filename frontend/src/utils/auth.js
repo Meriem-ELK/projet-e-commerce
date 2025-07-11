@@ -1,14 +1,23 @@
 /**
  * Vérifier si l'utilisateur est connecté
- */
+// Cette fonction regarde si une donnée "utilisateur_connecte" est enregistrée dans sessionStorage
+*/
 export function estConnecte() {
     const utilisateur = sessionStorage.getItem('utilisateur_connecte');
     return utilisateur !== null;
 }
 
 /**
- * Sauvegarder l'utilisateur connecté
- */
+ * Vérifier si l'utilisateur connecté est un administrateur
+*/
+export function estAdmin() {
+    const utilisateur = obtenirUtilisateurConnecte();
+    return utilisateur && utilisateur.role === "admin";
+}
+
+/**
+ * Enregistre les infos de l'utilisateur connecté dans sessionStorage
+*/
 export function sauvegarderUtilisateur(utilisateur) {
     // Retirer le mot de passe avant de sauvegarder
     const utilisateurSansMotDePasse = {
@@ -23,8 +32,8 @@ export function sauvegarderUtilisateur(utilisateur) {
 }
 
 /**
- * Obtenir l'utilisateur connecté
- */
+ * Récupère l'utilisateur connecté depuis sessionStorage
+*/
 export function obtenirUtilisateurConnecte() {
     const utilisateur = sessionStorage.getItem('utilisateur_connecte');
     if (utilisateur) {
@@ -35,7 +44,7 @@ export function obtenirUtilisateurConnecte() {
 
 /**
  * Déconnecter l'utilisateur
- */
+*/
 export function deconnecter() {
     sessionStorage.removeItem('utilisateur_connecte');
     window.location.href = '../index.html';
@@ -43,7 +52,7 @@ export function deconnecter() {
 
 /**
  * Mettre à jour le header selon l'état de connexion
- */
+*/
 export function mettreAJourHeader() {
     const utilisateur = obtenirUtilisateurConnecte();
     const headerNav = document.querySelector('header ul');
@@ -51,21 +60,34 @@ export function mettreAJourHeader() {
     if (utilisateur) {
         // Utilisateur connecté
         const nomUtilisateur = utilisateur.nom || utilisateur.email;
-    
-        headerNav.innerHTML = `
+        
+        // Navigation de base pour tous les utilisateurs connectés
+        let navigationHTML = `
             <li>
                 <a href="../index.html" class="header-nav">
                     <i class="fas fa-home"></i> Accueil
                 </a>
             </li>
-            <li>
-                <a href="../produitAjout/produit-ajout.html" class="header-nav">
-                    <i class="fas fa-plus-circle"></i> Ajouter un produit
-                </a>
-            </li>
+        `;
+
+        // Ajouter le lien "Ajouter un produit" uniquement pour les administrateurs
+        if (estAdmin()) {
+            navigationHTML += `
+                <li>
+                    <a href="../produitAjout/produit-ajout.html" class="header-nav">
+                        <i class="fas fa-plus-circle"></i> Ajouter un produit
+                    </a>
+                </li>
+            `;
+        }
+
+        // Continuer avec les autres éléments de navigation
+        navigationHTML += `
             <li>
                 <span class="header-nav user-info">
-                    <i class="fas fa-user"></i> Bienvenue ${nomUtilisateur}
+                    <a href="../utilisateur/index.html" class="header-nav user-info">
+                        <i class="fas fa-user"></i> Bienvenue ${nomUtilisateur}
+                    </a>
                 </span>
             </li>
             <li>
@@ -73,14 +95,20 @@ export function mettreAJourHeader() {
                     <i class="fas fa-sign-out-alt"></i> Déconnexion
                 </a>
             </li>
+        `;
+        if (!estAdmin()) {
+            navigationHTML += `
             <li>
-                <a href="./index.html" class="header-nav" title="Ajouter au panier">
+                <a href="../panier/panier.html" class="header-nav cart-icon" title="Ajouter au panier">
                     <i class="fas fa-cart-plus"></i>
                 </a>
             </li>
         `;
-
+        }
         
+        // On insère le HTML dans le header
+        headerNav.innerHTML = navigationHTML;
+
         // Bouton de déconnexion
         const btnDeconnexion = document.getElementById('btnDeconnexion');
         if (btnDeconnexion) {
