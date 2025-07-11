@@ -179,21 +179,5 @@
     "mouvement": "Automatique",
     "etancheite": "200m",
     "updatedAt": "2025-07-05T22:54:28.809Z"
-  },
-  {
-    "nom": "test5",
-    "marque": "Omega",
-    "description": "ddddddddddddddddddduyyyyyyyyyyyyyyyyyy",
-    "categorie": "Luxury Sport",
-    "materiau": "Or",
-    "mouvement": "Manuel",
-    "etancheite": "300m",
-    "image": null,
-    "prix": 14144,
-    "stock": 44,
-    "dateAjout": "2025-07-10T02:30:41.698Z",
-    "id": "0197f22b-bb4e-762b-ae66-8f98f13c3e97",
-    "createdAt": "2025-07-10T02:30:41.743Z",
-    "updatedAt": "2025-07-10T02:30:41.743Z"
   }
 ]
